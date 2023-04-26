@@ -22,7 +22,7 @@ pipeline {
      }
      stage('Build the image using docker') {
        steps {
-         sh 'docker build -t rajeswari123/medicureproject .'
+          sh 'docker build -t rajeswari123/medicureproject .'
        }
      }
    }
