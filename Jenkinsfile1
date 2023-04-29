@@ -5,10 +5,8 @@ pipeline {
        maven 'M2_HOME'
      }
      environment { 
-
        DOCKERHUB_CREDENTIALS= credentials('dockerhubcredentials') 
-
-    } 
+     } 
     stages {
      stage('checkout the project') {
        steps {
@@ -28,11 +26,6 @@ pipeline {
      stage('Build the image using docker') {
        steps {
           sh 'docker build -t rajeswari123/medicure:latest .'
-       }
-     }
-     stage('Deploy the application using ansible') {
-       steps {
-         
        }
      }
      stage('Docker Login') { 
