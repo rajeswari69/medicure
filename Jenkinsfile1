@@ -36,7 +36,16 @@ pipeline {
 
         } 
 
-      } 
+      }
+      stage('Push the image in Dockerhub') { 
+
+        steps { 
+
+           sh 'docker push rajeswari123/medicure' 
+
+        } 
+
+      }  
    }
 
 }
