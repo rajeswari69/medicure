@@ -1,7 +1,6 @@
 - name : Configure Docker on EC2 Instances
-  hosts : all
+  hosts : [server]
   become: true
-  connection : ssh
   tasks : 
   - name: updating apt
     command : sudo apt-get update
@@ -17,4 +16,4 @@
     become_user : root
 
   - name: Deploy Docker Container
-    command: docker run -itd -p 8081:8080 rajeswari123/medicure:latest
+    command: docker run -itd -p 8084:8081 rajeswari123/medicure:latest
