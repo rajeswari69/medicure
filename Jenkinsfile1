@@ -26,7 +26,7 @@ pipeline {
      }
      stage('Build the image using docker') {
        steps {
-          sh 'docker build -t rajeswari123/medicure:latest .'
+          sh 'docker build -t rajeswari123/healthcare:latest .'
        }
      }
      stage('Docker Login') { 
@@ -42,7 +42,7 @@ pipeline {
 
         steps { 
 
-           sh 'docker push rajeswari123/medicure' 
+           sh 'docker push rajeswari123/healthcare' 
 
         } 
 
