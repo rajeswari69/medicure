@@ -3,6 +3,7 @@ pipeline {
      tools {
        jdk 'JAVA_HOME'
        maven 'M2_HOME'
+       terraform 'T2_HOME'
      }
      environment { 
        DOCKERHUB_CREDENTIALS= credentials('dockerhubcredentials') 
@@ -46,11 +47,14 @@ pipeline {
         } 
 
       }  
-      stage('deploy the application using ansible') {
-        steps {
-          ansiblePlaybook credentialsId: 'ansibleSSHkey', disableHostKeyChecking: true, installation: 'ansible', inventory: '/etc/ansible/hosts', playbook: 'deploy.yml'
-        }
-      }
+     stage ('Configure newserver with Terraform'){
+                  steps {
+                     sh 'chmod 700 medicure.pem'
+                     sh 'terraform init'
+                     sh 'terraform validate'
+                     sh 'terraform apply --auto-approve'
+                  }
+     }
    }
 
 }
