@@ -1,12 +1,7 @@
 pipeline {
    agent any 
      tools {
-       jdk 'JAVA_HOME'
        maven 'M2_HOME'
-       terraform 'T2_HOME'
-     }
-     environment { 
-       DOCKERHUB_CREDENTIALS= credentials('dockerhubcredentials') 
      } 
     stages {
      stage('checkout the project') {
@@ -24,37 +19,7 @@ pipeline {
         publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: '/var/lib/jenkins/workspace/medicure/target/surefire-reports', reportFiles: 'index.html', reportName: 'HTML Report', reportTitles: '', useWrapperFileDirectly: true]) 
        }
      }
-     stage('Build the image using docker') {
-       steps {
-          sh 'docker build -t rajeswari123/healthcare:latest .'
-       }
-     }
-     stage('Docker Login') { 
-
-        steps { 
-
-           sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin' 
-
-        } 
-
-      }
-      stage('Push the image in Dockerhub') { 
-
-        steps { 
-
-           sh 'docker push rajeswari123/healthcare' 
-
-        } 
-
-      }  
-     stage ('Configure newserver with Terraform'){
-                  steps {
-                     sh 'chmod 700 medicure.pem'
-                     sh 'terraform init'
-                     sh 'terraform validate'
-                     sh 'terraform apply --auto-approve'
-                  }
-     }
+    
    }
 
 }
