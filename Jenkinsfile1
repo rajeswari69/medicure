@@ -11,7 +11,7 @@ pipeline {
     stages {
      stage('checkout the project') {
        steps {
-          git branch: 'main', url: 'https://github.com/rajeswari69/Medicure-project.git'
+          git branch: 'main', url: 'https://github.com/rajeswari69/medicure.git'
        }
      }
      stage('package the application') {
@@ -21,7 +21,7 @@ pipeline {
      }
      stage('publish HTML report') {
        steps {
-        publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: '/var/lib/jenkins/workspace/Medicure_project/target/surefire-reports', reportFiles: 'index.html', reportName: 'HTML Report', reportTitles: '', useWrapperFileDirectly: true]) 
+        publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: '/var/lib/jenkins/workspace/medicure/target/surefire-reports', reportFiles: 'index.html', reportName: 'HTML Report', reportTitles: '', useWrapperFileDirectly: true]) 
        }
      }
      stage('Build the image using docker') {
